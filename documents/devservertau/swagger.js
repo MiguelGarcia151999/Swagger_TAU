@@ -13,12 +13,8 @@ module.exports = {
         
     },
     servers: [
-        {
-			url: SERVERS.DEV_SERVERAWS_TAU,
-		},
-		{
-			url: SERVERS.DEV_SERVERLH_TAU,
-        },
+        { url: SERVERS.DEV_SERVERAWS_TAU, },
+		{ url: SERVERS.DEV_SERVERLH_TAU, },
     ], 
     tags: [
         {
