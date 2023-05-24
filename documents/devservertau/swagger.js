@@ -1,24 +1,25 @@
 const { SERVERS } = require("../../src/model/constants");
 
 module.exports = {
-    openapi: "3.0.1",
+    openapi: "3.0.0",
     info: {
-        title: "DevServer TAU",
         description: "Documentacion correspondiente de las Apis realizadas en el desarrollo del proyeco DevServer_TAU",
+        version: "1.0.0",
+        title: "DevServer TAU",
         termsOfService: "http://swagger.io/terms/",
         contact: {
 			email: "eibonsbook151999@gmail.com",
 		},
-        version: "1.0.0"
+        
     },
     servers: [
-        /*{
+        {
 			url: SERVERS.DEV_SERVERAWS_TAU,
-		},*/
+		},
 		{
 			url: SERVERS.DEV_SERVERLH_TAU,
-		},
-	],
+        },
+    ], 
     tags: [
         {
             name: "Mongo",
@@ -58,6 +59,44 @@ module.exports = {
                     500: { description: "Error interno de servidor"}
                 }
             }
+        },
+        "/api/medicexp/insert": {
+            post: {
+                tags: ["Mongo"],
+                summary: "Insertar datos a mongobd",
+                description: "Esta api es para registar expedientes medicos a mongodb",
+                operationId: "registarExpediente",
+                produces: ["application/json"],
+                parameters: [
+                    {
+                        in: 'body',
+                        name: "datos",
+                        required: true,
+                        schema: {
+                            $ref: "#/definitions/registroExpedientes"
+                        }
+                    }
+                ],
+                responses: {
+                    200: { description: "Peticion realizada exitosamente"},
+                    400: {description: "Error de peticion del usuario"},
+                    500: { description: "Error interno de servidor"}
+                }
+            }
         }
     },
+    definitions: {
+        registroExpedientes: {
+            example: {
+                numExp: "0000000004",
+                nombre: "Samael Garcia",
+                tipoSanguineo: "+A",
+                alergias: "Mariscos",
+                operaciones: "GastroIntestinal",
+                enfCronicas: "Asma",
+                equipBiomedico: "Ninguno",
+                donante: "No"
+            }
+        }
+    }
 }
