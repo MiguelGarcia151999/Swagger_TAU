@@ -124,6 +124,42 @@ module.exports = {
                 },
             },
         },
+        '/api/medicexp/update': {
+            put: {
+                tags: ['RegistroExpedientes'],
+                summary: 'Actualizar un expediente de MongoDB',
+                description: 'Esta api actualiza todo un registro dentro de la base de datos ',
+                produces: ['application/json'],
+                parameters: [
+                    {
+                        in: 'header',
+                        name: 'id',
+                        required: false,
+                        type: 'Integer',
+                        description: '_id del registro al que se le van actualizar sus valores',
+                    },
+                    {
+                        in: 'body',
+                        name: 'object',
+                        required: true,
+                        schema: {
+                            $ref: '#definitions/registroExpediente'
+                        }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: 'Peticion realizada exitosamente'
+                    },
+                    400: {
+                        description: 'Error de peticion del usuario'
+                    },
+                    500: {
+                        description: 'Error interno de servidor'
+                    },
+                },
+            },
+        },
     },
     definitions: {
         registroExpediente: {
