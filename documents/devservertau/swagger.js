@@ -49,8 +49,8 @@ module.exports = {
                     {
                         in: 'header',
                         name: 'id',
-                        required: true,
-                        type: 'String',
+                        required: false,
+                        type: 'Integer',
                         description: 'Valor del _id que que tiene el registro en mongo'
                     },
                 ],
@@ -81,6 +81,34 @@ module.exports = {
                         schema: {
                             $ref: '#definitions/registroExpediente'
                         }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: 'Peticion realizada exitosamente'
+                    },
+                    400: {
+                        description: 'Error de peticion del usuario'
+                    },
+                    500: {
+                        description: 'Error interno de servidor'
+                    },
+                },
+            },
+        },
+        '/api/medicexp/delete': {
+            delete: {
+                tags: ['RegistroExpedientes'],
+                summary: 'Eliminar un expediente de MongoDB',
+                description: 'Esta api elimina un expediente dentro de la base de datos de mongo',
+                produces: ['application/json'],
+                parameters: [
+                    {
+                        in: 'header',
+                        name: 'id',
+                        required: false,
+                        type: 'Integer',
+                        description: '_id del registro que se va a borrar de mongo',
                     }
                 ],
                 responses: {
