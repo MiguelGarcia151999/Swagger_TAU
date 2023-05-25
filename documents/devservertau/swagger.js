@@ -1,98 +1,114 @@
 const { SERVERS } = require("../../src/model/constants");
 
 module.exports = {
-    openapi: "3.0.0",
+    swagger: '2.0',
     info: {
-        description: "Documentacion correspondiente de las Apis realizadas en el desarrollo del proyeco DevServer_TAU",
-        version: "1.0.0",
-        title: "DevServer TAU",
-        termsOfService: "http://swagger.io/terms/",
+        description: "Documentacion acerca de las API's desarrolladas para el proyecto TAU",
+        version: '4.0.0',
+        title: 'TAU DEVELOP',
+        termsOfService: 'http://swagger.io/terms/',
         contact: {
-			email: "eibonsbook151999@gmail.com",
-		},
-        
+            email: 'eibonsbook151999@gmail.com',
+        },
     },
-    servers: [
-        { url: SERVERS.DEV_SERVERAWS_TAU, },
-		{ url: SERVERS.DEV_SERVERLH_TAU, },
-    ], 
+    host: SERVERS.DEV_SERVERLH_TAU,
     tags: [
         {
-            name: "Mongo",
-            description: "Apis que hacen peticiones a la base de mongobd",
+            name: 'RegistroExpedientes',
+            description: 'Todo acerca de registrar expedientes medicos en mongo',
         },
     ],
+    schemes: ['http','https'],
     paths: {
-        "/api/medicexp/": {
+        '/api/medicexp/': {
             get: {
-                tags: ["Mongo"],
-                summary: "Hacer una peticion get a la base de datos en mongobd",
-                description: "Esta api trae todos los registros que se encuentran dentro de la base de datos de mongobd",
-                operationId: "consultarRegistros",
+                tags: ['RegistroExpedientes'],
+                summary: 'Consultar registros en Mongo',
+                description: 'La API trae todos los registros de los expedientes que hay en mongo',
+                produces: ['application/json'],
                 responses: {
-                    200: { description: "Peticion realizada exitosamente"},
-                    500: { description: "Error interno de servidor"}
-                }
+					200: {
+						description: 'Peticion realizada exitosamente'
+					},
+					400: {
+						description: 'Error de peticion del usuario'
+					},
+					500: {
+						description: 'Error interno de servidor'
+					},
+				},
             },
         },
-        "/api/medicexp/:id": {
+        '/api/medicexp/:id': {
             get: {
-                tags: ["Mongo"],
-                summary: "Hacer una petion para traer un registro por id",
-                description: "Esta api trae un archivo de datos mientras se le mande un _id de mongodb",
-                operationId: "consultarRegistro",
+                tags: ['RegistroExpedientes'],
+                summary: 'Hace una petion para traer un registro por id',
+                description: 'Esta api trae un archivo de datos mientras se le mande un _id de mongodb',
+                produces: ['application/json'],
                 parameters: [
                     {
                         in: 'header',
-                        name: "id",
+                        name: 'id',
                         required: true,
-                        type: "integer",
-                    }
+                        type: 'String',
+                        description: 'Valor del _id que que tiene el registro en mongo'
+                    },
                 ],
                 responses: {
-                    200: { description: "Peticion realizada exitosamente"},
-                    400: {description: "Error de peticion del usuario"},
-                    500: { description: "Error interno de servidor"}
-                }
-            }
+                    200: {
+                        description: 'Peticion realizada exitosamente'
+                    },
+                    400: {
+                        description: 'Error de peticion del usuario'
+                    },
+                    500: {
+                        description: 'Error interno de servidor'
+                    },
+                },
+            },
         },
-        "/api/medicexp/insert": {
+        '/api/medicexp/insert': {
             post: {
-                tags: ["Mongo"],
-                summary: "Insertar datos a mongobd",
-                description: "Esta api es para registar expedientes medicos a mongodb",
-                operationId: "registarExpediente",
-                produces: ["application/json"],
+                tags: ['RegistroExpedientes'],
+                summary: 'Inserta un expediente a MongoDB',
+                description: 'Esta api hace un insercion de un expediente a la base de datos de mongo',
+                produces: ['application/json'],
                 parameters: [
                     {
                         in: 'body',
-                        name: "datos",
+                        name: 'object',
                         required: true,
                         schema: {
-                            $ref: "#/definitions/registroExpedientes"
+                            $ref: '#definitions/registroExpediente'
                         }
                     }
                 ],
                 responses: {
-                    200: { description: "Peticion realizada exitosamente"},
-                    400: {description: "Error de peticion del usuario"},
-                    500: { description: "Error interno de servidor"}
-                }
-            }
-        }
+                    200: {
+                        description: 'Peticion realizada exitosamente'
+                    },
+                    400: {
+                        description: 'Error de peticion del usuario'
+                    },
+                    500: {
+                        description: 'Error interno de servidor'
+                    },
+                },
+            },
+        },
     },
     definitions: {
-        registroExpedientes: {
+        registroExpediente: {
             example: {
-                numExp: "0000000004",
-                nombre: "Samael Garcia",
-                tipoSanguineo: "+A",
-                alergias: "Mariscos",
-                operaciones: "GastroIntestinal",
-                enfCronicas: "Asma",
-                equipBiomedico: "Ninguno",
-                donante: "No"
-            }
-        }
-    }
+                "numExp": "00000000007",
+                "nombre": "Thor Odinson",
+                "tipoSanguineo": "+A",
+                "alergias": "Pito",
+                "operaciones": "Ninguna",
+                "enfCronicas": "Asma",
+                "equipBiomedico": "Ninguno",
+                "donante": "No"
+            },
+        },
+    },
 }
