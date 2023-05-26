@@ -14,7 +14,7 @@ module.exports = {
     host: SERVERS.DEV_SERVERLH_TAU,
     tags: [
         {
-            name: 'RegistroExpedientes',
+            name: 'ExpedientesMongoDB',
             description: 'Todo acerca de registrar expedientes medicos en mongo',
         },
     ],
@@ -22,7 +22,7 @@ module.exports = {
     paths: {
         '/api/medicexp/': {
             get: {
-                tags: ['RegistroExpedientes'],
+                tags: ['ExpedientesMongoDB'],
                 summary: 'Consultar registros en Mongo',
                 description: 'La API trae todos los registros de los expedientes que hay en mongo',
                 produces: ['application/json'],
@@ -41,8 +41,8 @@ module.exports = {
         },
         '/api/medicexp/:id': {
             get: {
-                tags: ['RegistroExpedientes'],
-                summary: 'Hace una petion para traer un registro por id',
+                tags: ['ExpedientesMongoDB'],
+                summary: 'Consulta un registro a MongoDB por ID',
                 description: 'Esta api trae un archivo de datos mientras se le mande un _id de mongodb',
                 produces: ['application/json'],
                 parameters: [
@@ -69,7 +69,7 @@ module.exports = {
         },
         '/api/medicexp/insert': {
             post: {
-                tags: ['RegistroExpedientes'],
+                tags: ['ExpedientesMongoDB'],
                 summary: 'Inserta un expediente a MongoDB',
                 description: 'Esta api hace un insercion de un expediente a la base de datos de mongo',
                 produces: ['application/json'],
@@ -98,8 +98,8 @@ module.exports = {
         },
         '/api/medicexp/delete': {
             delete: {
-                tags: ['RegistroExpedientes'],
-                summary: 'Eliminar un expediente de MongoDB',
+                tags: ['ExpedientesMongoDB'],
+                summary: 'Elimina un expediente de MongoDB por ID',
                 description: 'Esta api elimina un expediente dentro de la base de datos de mongo',
                 produces: ['application/json'],
                 parameters: [
@@ -126,8 +126,8 @@ module.exports = {
         },
         '/api/medicexp/update': {
             put: {
-                tags: ['RegistroExpedientes'],
-                summary: 'Actualizar un expediente de MongoDB',
+                tags: ['ExpedientesMongoDB'],
+                summary: 'Actualiza un expediente de MongoDB por ID',
                 description: 'Esta api actualiza todo un registro dentro de la base de datos ',
                 produces: ['application/json'],
                 parameters: [
